@@ -1,7 +1,7 @@
 # coding:utf-8
 import json
 from urllib.parse import unquote
-from data_product import Product
+import data_product
 
 # 解析url中的参数
 def resolve_params(request):
@@ -13,8 +13,8 @@ def resolve_params(request):
     return params
 
 # 根据传参执行操作并返回json数据
-def action(request, method_action):
+def action(request):
     params = resolve_params(request)
-    method = eval(method_action + '.' + params.get('method'))
+    method = eval('data_product.' + params.get('method'))
     result = method(params)
     return json.dumps(result)

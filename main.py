@@ -15,7 +15,7 @@ class DataProduct(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(40)
     @run_on_executor
     def post(self):
-        product = http_method.action(self, 'Product')
+        product = http_method.action(self)
         print(product)
         self.write(product)
         self.finish()
