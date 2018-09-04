@@ -35,6 +35,7 @@ def set_timer(timer):
             flag = 1
         else:
             if flag == 1:
+                timer = datetime.datetime.fromisoformat(timer)
                 timer += datetime.timedelta(days=1)
                 flag = 0
 
