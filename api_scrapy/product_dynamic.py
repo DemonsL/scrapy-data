@@ -100,9 +100,11 @@ def get_product_desc(driver):
 
 # 返回商品类别和排名
 def get_rank_and_cates(driver):
+    listinfo = ''
     try:
         # listinfo1 = driver.find_element_by_id('detailBullets_feature_div').text
-        listinfo2 = driver.find_element_by_id('SalesRank').text
+        listinfo = driver.find_element_by_id('SalesRank').text
+        listinfo = listinfo.split('\n')
     except:
         pass
         # try:
@@ -114,13 +116,14 @@ def get_rank_and_cates(driver):
         #     # 其他表现形式
         #     # otherclass = driver.find_element_by_xpath('//*[@id="detail-bullets"]/table/tbody').text
         #     # print(otherclass)
-    ls1 = listinfo2.split('\n')
+
     ranks = []
     cates = []
-    for ls in ls1:
-        lls = ls.split('#')[1]
-        ranks.append(lls.split(' in ')[0].replace(',', ''))
-        cates.append(lls.split(' in ')[1].split('(See Top 100')[0])
+    if listinfo:
+        for ls in listinfo:
+            lls = ls.split('#')[1]
+            ranks.append(lls.split(' in ')[0].replace(',', ''))
+            cates.append(lls.split(' in ')[1].split('(See Top 100')[0])
 
     return ranks, cates
 
