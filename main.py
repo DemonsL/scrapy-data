@@ -15,7 +15,7 @@ class DataProduct(tornado.web.RequestHandler):
     executor = ThreadPoolExecutor(40)
     @run_on_executor
     def post(self):
-        product = http_method.action(self)
+        product = http_method.product_action(self)
         print(product)
         self.write(product)
         self.finish()
@@ -24,7 +24,7 @@ class DataProduct(tornado.web.RequestHandler):
 def main():
     method_list = [
         ('/', MainHandler),
-        ('/scrapy_data/product', DataProduct)
+        ('/product_scrapy', DataProduct)
     ]
     app = tornado.web.Application(method_list, autoreload=True)
     print('run...')
